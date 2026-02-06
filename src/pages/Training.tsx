@@ -1,248 +1,198 @@
-import { useScrollAnimation } from '../hooks/useScrollAnimation';
-import { GraduationCap, Cog, Heart, Sprout } from 'lucide-react';
+import { GraduationCap, Cog, Heart, Sprout, CheckCircle2, ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export default function Training() {
-  const header = useScrollAnimation();
-  const intro = useScrollAnimation();
-  const portfolio = useScrollAnimation();
-  const approach = useScrollAnimation();
-
   const trainingCards = [
     {
       icon: GraduationCap,
-      title: 'Education and Academic Excellence',
+      title: 'Academic Excellence',
       programs: [
-        {
-          name: 'Faculty Development Programs (FDPs)',
-          description: 'Enhancing teaching effectiveness and academic innovation among educators.',
-        },
-        {
-          name: 'Innovative Teaching Methodologies',
-          description: 'Introducing modern pedagogical tools for learner-centered education.',
-        },
-        {
-          name: 'Curriculum Design and OBE',
-          description:
-            'Training faculty in outcome-based education and curriculum alignment with industry needs.',
-        },
-        {
-          name: 'Academic Leadership and Governance',
-          description:
-            'Building leadership capabilities in academic planning and institutional management.',
-        },
+        { name: 'Faculty Development', desc: 'Enhancing teaching effectiveness & innovation.' },
+        { name: 'Modern Pedagogy', desc: 'Tools for learner-centered education.' },
+        { name: 'Outcome-Based Education', desc: 'Curriculum alignment with industry needs.' },
+        { name: 'Academic Leadership', desc: 'Building institutional management skills.' },
       ],
+      color: "bg-blue-50 text-blue-600",
+      accent: "bg-blue-600"
     },
     {
       icon: Cog,
-      title: 'Skill Development and Industry 4.0',
+      title: 'Industry 4.0 & Skills',
       programs: [
-        {
-          name: 'CAD/CAM and 3D Printing',
-          description: 'Offering hands-on skills in advanced design and manufacturing technologies.',
-        },
-        {
-          name: 'Digital Manufacturing & Simulation Tools',
-          description: 'Training learners in software-driven production and virtual modeling.',
-        },
-        {
-          name: 'IoT, AI & Robotics',
-          description:
-            'Introducing engineering students to intelligent systems and future-ready technologies.',
-        },
-        {
-          name: 'Employability Skills Workshops',
-          description:
-            'Equipping youth with soft skills, career readiness, and personal branding strategies.',
-        },
+        { name: 'CAD/CAM & 3D Printing', desc: 'Hands-on design & manufacturing skills.' },
+        { name: 'Digital Manufacturing', desc: 'Simulation & virtual modeling tools.' },
+        { name: 'IoT, AI & Robotics', desc: 'Future-ready intelligent systems.' },
+        { name: 'Employability Skills', desc: 'Soft skills & career readiness.' },
       ],
+      color: "bg-orange-50 text-orange-600",
+      accent: "bg-orange-600"
     },
     {
       icon: Heart,
-      title: 'Healthcare and Public Health',
+      title: 'Healthcare & Public Health',
       programs: [
-        {
-          name: 'Community Health Training',
-          description: 'Educating volunteers in basic healthcare, hygiene, and outreach methods.',
-        },
-        {
-          name: 'First Aid & Emergency Response',
-          description: 'Teaching life-saving interventions for immediate care in crisis situations.',
-        },
-        {
-          name: 'Hospital Administration',
-          description:
-            'Building managerial skills for efficient healthcare delivery and patient services.',
-        },
-        {
-          name: 'Nutrition & Preventive Care',
-          description: 'Promoting wellness through balanced nutrition and lifestyle education.',
-        },
+        { name: 'Community Health', desc: 'Basic hygiene & outreach methods.' },
+        { name: 'Emergency Response', desc: 'Life-saving interventions training.' },
+        { name: 'Hospital Administration', desc: 'Efficient healthcare delivery skills.' },
+        { name: 'Nutrition & Wellness', desc: 'Preventive care & lifestyle education.' },
       ],
+      color: "bg-rose-50 text-rose-600",
+      accent: "bg-rose-600"
     },
     {
       icon: Sprout,
-      title: 'Social Welfare and Community Development',
+      title: 'Community Development',
       programs: [
-        {
-          name: 'Rural Livelihood Training',
-          description: 'Empowering rural communities with income-generating vocational skills.',
-        },
-        {
-          name: 'Women Empowerment Programs',
-          description: 'Strengthening SHGs and promoting leadership among women.',
-        },
-        {
-          name: 'Entrepreneurship for Youth',
-          description: 'Guiding aspiring entrepreneurs to develop, fund, and scale their ideas.',
-        },
-        {
-          name: 'Financial & Digital Literacy',
-          description: 'Educating communities on banking, budgeting, and digital transactions.',
-        },
+        { name: 'Rural Livelihoods', desc: 'Vocational skills for income generation.' },
+        { name: 'Women Empowerment', desc: 'Leadership & SHG strengthening.' },
+        { name: 'Youth Entrepreneurship', desc: 'Idea to business guidance.' },
+        { name: 'Digital Literacy', desc: 'Banking & digital transaction skills.' },
       ],
+      color: "bg-emerald-50 text-emerald-600",
+      accent: "bg-emerald-600"
     },
   ];
 
   return (
-    <div className="min-h-screen pt-20">
-      <section className="relative h-[400px] flex items-center justify-center bg-gradient-to-br from-primary to-primary/80">
-        <div className="absolute inset-0 bg-black/20" />
-        <div
-          ref={header.ref}
-          className={`relative z-10 text-center px-4 transition-all duration-1000 ${
-            header.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-          }`}
+    <div className="min-h-screen pt-20 bg-surface">
+      {/* Hero Section */}
+      <section className="relative h-[400px] flex items-center justify-center bg-primary-dark overflow-hidden">
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1544531586-fde5298cdd40?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-20 mix-blend-overlay" />
+        <div className="absolute inset-0 bg-gradient-to-t from-primary-dark to-transparent" />
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="relative z-10 text-center px-4 max-w-4xl mx-auto"
         >
-          <h1 className="text-5xl font-bold text-white mb-4">Training Philosophy</h1>
-          <p className="text-xl text-white/90">
-            Building Skills. Empowering Communities. Shaping Futures.
+          <span className="text-accent font-semibold tracking-wider uppercase mb-4 block">Capacity Building</span>
+          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">Training Philosophy</h1>
+          <p className="text-xl text-white/90 leading-relaxed font-light">
+            Building Skills. Empowering Communities. Shaping Futures through transformative education.
           </p>
+        </motion.div>
+      </section>
+
+      {/* Intro Section */}
+      <section className="py-20 bg-white">
+        <div className="container-custom">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="max-w-4xl mx-auto text-center"
+          >
+            <h2 className="text-3xl font-bold text-primary-dark mb-6">Bridging the Skills Gap</h2>
+            <p className="text-lg text-text leading-relaxed text-left md:text-center">
+              Dhrishta Educational Foundation is committed to fostering human capital development across India. As a Section-8 nonprofit organization, we believe that training is a transformative tool that empowers individuals, strengthens communities, and accelerates national development. Our programs are meticulously designed to cater to students, professionals, educators, healthcare workers, and community leaders.
+            </p>
+          </motion.div>
         </div>
       </section>
 
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4 max-w-[1200px]">
-          <div
-            ref={intro.ref}
-            className={`max-w-4xl mx-auto space-y-6 transition-all duration-1000 ${
-              intro.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}
-          >
-            <p className="text-lg text-text-dark leading-relaxed">
-              Dhrishta Educational Foundation is committed to bridging the skills gap and fostering
-              human capital development across India. As a Section-8 nonprofit organization focused
-              on education, healthcare, and social welfare, we believe that training is a
-              transformative tool that empowers individuals, strengthens communities, and
-              accelerates national development.
-            </p>
-            <p className="text-lg text-text-dark leading-relaxed">
-              Our training programs are meticulously designed to cater to students, professionals,
-              educators, healthcare workers, and community leaders—equipping them with the
-              knowledge, skills, and mindset required to thrive in an ever-evolving world.
-            </p>
+      {/* Training Portfolio */}
+      <section className="py-24 bg-secondary">
+        <div className="container-custom">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-primary-dark">Our Training Portfolio</h2>
+            <div className="w-24 h-1 bg-accent mx-auto mt-4 rounded-full" />
           </div>
-        </div>
-      </section>
 
-      <section className="py-16 bg-secondary">
-        <div className="container mx-auto px-4 max-w-[1200px]">
-          <h2 className="text-4xl font-bold text-center text-primary mb-12">Training Portfolio</h2>
-          <div
-            ref={portfolio.ref}
-            className={`grid grid-cols-1 md:grid-cols-2 gap-8 transition-all duration-1000 ${
-              portfolio.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}
-          >
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {trainingCards.map((card, index) => {
               const Icon = card.icon;
               return (
-                <div
+                <motion.div
                   key={index}
-                  className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="bg-white rounded-3xl p-8 shadow-md hover:shadow-xl transition-all duration-300 border border-transparent hover:border-gray-100"
                 >
-                  <div className="flex items-center gap-4 mb-6">
-                    <div className="w-14 h-14 bg-accent/10 rounded-full flex items-center justify-center flex-shrink-0">
-                      <Icon size={28} className="text-accent" />
+                  <div className="flex items-start gap-6 mb-8">
+                    <div className={`w-16 h-16 ${card.color} rounded-2xl flex items-center justify-center flex-shrink-0`}>
+                      <Icon size={32} />
                     </div>
-                    <h3 className="text-2xl font-bold text-primary">{card.title}</h3>
+                    <div>
+                      <h3 className="text-2xl font-bold text-primary-dark mb-2">{card.title}</h3>
+                      <div className={`h-1 w-12 ${card.accent} rounded-full`} />
+                    </div>
                   </div>
-                  <div className="space-y-4">
+
+                  <div className="grid gap-6">
                     {card.programs.map((program, idx) => (
-                      <div key={idx}>
-                        <h4 className="text-lg font-semibold text-accent mb-1">{program.name}</h4>
-                        <p className="text-text-dark text-sm leading-relaxed">
-                          {program.description}
+                      <div key={idx} className="group/item">
+                        <h4 className="text-lg font-bold text-primary-dark group-hover/item:text-accent transition-colors mb-1">
+                          {program.name}
+                        </h4>
+                        <p className="text-text-light text-sm leading-relaxed">
+                          {program.desc}
                         </p>
                       </div>
                     ))}
                   </div>
-                </div>
+                </motion.div>
               );
             })}
           </div>
         </div>
       </section>
 
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4 max-w-[1200px]">
-          <div
-            ref={approach.ref}
-            className={`transition-all duration-1000 ${
-              approach.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}
-          >
-            <h2 className="text-4xl font-bold text-primary mb-8">Training Delivery & Approach</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-              <div className="bg-secondary rounded-2xl p-6">
-                <h3 className="text-2xl font-bold text-accent mb-4">Key Points</h3>
-                <ul className="space-y-3">
-                  <li className="flex items-start">
-                    <span className="w-2 h-2 bg-accent rounded-full mr-3 mt-2 flex-shrink-0" />
-                    <span className="text-text-dark">
-                      <strong>Blended Learning:</strong> A mix of theory, practice, and digital
-                      engagement ensures effective learning outcomes.
-                    </span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="w-2 h-2 bg-accent rounded-full mr-3 mt-2 flex-shrink-0" />
-                    <span className="text-text-dark">
-                      <strong>Expert-Led Sessions:</strong> Training delivered by experienced
-                      professionals and subject experts.
-                    </span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="w-2 h-2 bg-accent rounded-full mr-3 mt-2 flex-shrink-0" />
-                    <span className="text-text-dark">
-                      <strong>Certifications & Recognition:</strong> Most programs offer joint
-                      certifications and digital credentials for career growth.
-                    </span>
-                  </li>
-                </ul>
+      {/* Methodology Section */}
+      <section className="py-24 bg-primary-dark text-white relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-full bg-[url('/assets/images/pattern.svg')] opacity-5" />
+        <div className="container-custom relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <h2 className="text-4xl font-bold mb-8">Training Delivery & Approach</h2>
+              <div className="space-y-6">
+                {[
+                  { title: "Blended Learning", desc: "A mix of theory, practice, and digital engagement ensures effective outcomes." },
+                  { title: "Expert-Led Sessions", desc: "Delivered by experienced professionals and subject matter experts." },
+                  { title: "Certifications", desc: "Joint certifications and digital credentials for career growth." }
+                ].map((item, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.2 }}
+                    className="flex gap-4 p-4 rounded-xl hover:bg-white/5 transition-colors"
+                  >
+                    <CheckCircle2 className="w-8 h-8 text-accent flex-shrink-0 mt-1" />
+                    <div>
+                      <h4 className="text-xl font-bold mb-2 text-white">{item.title}</h4>
+                      <p className="text-white/70">{item.desc}</p>
+                    </div>
+                  </motion.div>
+                ))}
               </div>
+            </div>
 
-              <div className="bg-secondary rounded-2xl p-6">
-                <h3 className="text-2xl font-bold text-accent mb-4">
-                  Collaborations & Certifications
-                </h3>
-                <p className="text-text-dark mb-4">
-                  Dhrishta collaborates with government agencies, academic institutions, corporates,
-                  and international bodies to ensure high-impact training. Select programs offer:
-                </p>
-                <ul className="space-y-2">
-                  <li className="flex items-center">
-                    <span className="w-2 h-2 bg-accent rounded-full mr-3" />
-                    <span className="text-text-dark">Joint Certifications</span>
+            <div className="bg-white/10 backdrop-blur-md rounded-3xl p-8 border border-white/10">
+              <h3 className="text-2xl font-bold mb-6 text-accent">Strategic Collaborations</h3>
+              <p className="text-lg leading-relaxed mb-8 text-white/90">
+                Dhrishta collaborates with government agencies, academic institutions, corporates, and international bodies to ensure high-impact training.
+              </p>
+              <ul className="space-y-4">
+                {[
+                  "Joint Certifications",
+                  "Industry-Endorsed Badges",
+                  "Internship Linkages",
+                  "Placement Support"
+                ].map((item, i) => (
+                  <li key={i} className="flex items-center gap-3 font-medium">
+                    <div className="w-1.5 h-1.5 bg-accent rounded-full" />
+                    {item}
                   </li>
-                  <li className="flex items-center">
-                    <span className="w-2 h-2 bg-accent rounded-full mr-3" />
-                    <span className="text-text-dark">Industry-endorsed Skill Badges</span>
-                  </li>
-                  <li className="flex items-center">
-                    <span className="w-2 h-2 bg-accent rounded-full mr-3" />
-                    <span className="text-text-dark">Internship and Placement Linkages</span>
-                  </li>
-                </ul>
-              </div>
+                ))}
+              </ul>
+
+              <button className="mt-8 w-full btn-primary flex items-center justify-center gap-2">
+                Explore Partnerships <ArrowRight className="w-4 h-4" />
+              </button>
             </div>
           </div>
         </div>

@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -43,73 +46,128 @@ export default function Navigation() {
   ];
 
   return (
-    <nav
-      className={`fixed w-full z-50 transition-all duration-400 ${
-        isScrolled ? 'bg-white/95 backdrop-blur-md shadow-lg py-3' : 'bg-white/90 backdrop-blur-sm py-4'
-      } ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}
+    <motion.nav
+      initial={{ y: -100 }}
+      animate={{
+        y: isVisible ? 0 : -100,
+        backgroundColor: isScrolled ? 'rgba(255, 255, 255, 0.9)' : 'rgba(255, 255, 255, 0.7)'
+      }}
+      transition={{ duration: 0.3 }}
+      className={twMerge(
+        "fixed w-full z-50 backdrop-blur-md border-b border-white/20 transition-all duration-300",
+        isScrolled ? "shadow-soft py-3" : "py-5"
+      )}
     >
-      <div className="container mx-auto px-4 lg:px-8 max-w-[1200px]">
-        <div className="flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-3 group">
+      <div className="container-custom flex items-center justify-between">
+        <Link to="/" className="flex items-center gap-3 group">
+          <motion.div
+            whileHover={{ scale: 1.1, rotate: 5 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
             <img
               src="/assets/images/logo.png"
               alt="Dhrishta Foundation Logo"
-              className="h-12 w-12 object-contain transition-transform duration-300 group-hover:scale-110"
+              className="h-10 w-10 sm:h-12 sm:w-12 object-contain"
             />
-            <span className="text-xl font-bold text-primary hidden sm:block">
-              Dhrishta Foundation
-            </span>
-          </Link>
+          </motion.div>
+          <span className="text-xl font-bold bg-gradient-to-r from-primary-dark to-primary bg-clip-text text-transparent hidden sm:block">
+            Dhrishta Foundation
+          </span>
+        </Link>
 
-          <div className="hidden lg:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className={`text-base font-medium transition-all duration-300 hover:text-accent relative group ${
-                  location.pathname === link.path ? 'text-accent' : 'text-text-dark'
-                }`}
-              >
+        {/* Desktop Navigation */}
+        <div className="hidden lg:flex items-center gap-8">
+          {navLinks.map((link) => (
+            <Link
+              key={link.path}
+              to={link.path}
+              className="relative group py-2"
+            >
+              <span className={clsx(
+                "text-sm font-semibold transition-colors duration-300",
+                location.pathname === link.path ? "text-accent" : "text-text-dark group-hover:text-accent-hover"
+              )}>
                 {link.name}
-                <span
-                  className={`absolute -bottom-1 left-0 h-0.5 bg-accent transition-all duration-300 ${
-                    location.pathname === link.path ? 'w-full' : 'w-0 group-hover:w-full'
-                  }`}
-                />
-              </Link>
-            ))}
-          </div>
-
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden text-primary hover:text-accent transition-colors duration-300"
-            aria-label="Toggle menu"
-          >
-            {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
-          </button>
+              </span>
+              <span
+                className={clsx(
+                  "absolute bottom-0 left-0 h-0.5 bg-accent rounded-full transition-all duration-300 ease-out",
+                  location.pathname === link.path ? "w-full" : "w-0 group-hover:w-full"
+                )}
+              />
+            </Link>
+          ))}
         </div>
 
+        {/* Mobile Menu Button */}
+        <motion.button
+          whileTap={{ scale: 0.9 }}
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          className="lg:hidden p-2 text-primary-dark hover:text-accent transition-colors duration-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent/20"
+          aria-label="Toggle menu"
+        >
+          <AnimatePresence mode="wait">
+            {isMenuOpen ? (
+              <motion.div
+                key="close"
+                initial={{ opacity: 0, rotate: -90 }}
+                animate={{ opacity: 1, rotate: 0 }}
+                exit={{ opacity: 0, rotate: 90 }}
+                transition={{ duration: 0.2 }}
+              >
+                <X size={28} />
+              </motion.div>
+            ) : (
+              <motion.div
+                key="menu"
+                initial={{ opacity: 0, rotate: 90 }}
+                animate={{ opacity: 1, rotate: 0 }}
+                exit={{ opacity: 0, rotate: -90 }}
+                transition={{ duration: 0.2 }}
+              >
+                <Menu size={28} />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.button>
+      </div>
+
+      {/* Mobile Menu Dropdown */}
+      <AnimatePresence>
         {isMenuOpen && (
-          <div className="lg:hidden mt-4 pb-4 border-t border-border-light pt-4">
-            <div className="flex flex-col gap-3">
-              {navLinks.map((link) => (
-                <Link
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="lg:hidden border-t border-border-light overflow-hidden bg-white/95 backdrop-blur-xl"
+          >
+            <div className="container-custom py-6 flex flex-col gap-2">
+              {navLinks.map((link, index) => (
+                <motion.div
                   key={link.path}
-                  to={link.path}
-                  onClick={() => setIsMenuOpen(false)}
-                  className={`text-base font-medium py-2 px-4 rounded-lg transition-all duration-300 ${
-                    location.pathname === link.path
-                      ? 'bg-accent text-white'
-                      : 'text-text-dark hover:bg-secondary'
-                  }`}
+                  initial={{ x: -20, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ delay: index * 0.05 }}
                 >
-                  {link.name}
-                </Link>
+                  <Link
+                    to={link.path}
+                    onClick={() => setIsMenuOpen(false)}
+                    className={twMerge(
+                      "block text-base font-semibold py-3 px-4 rounded-xl transition-all duration-300 border border-transparent",
+                      location.pathname === link.path
+                        ? "bg-accent/10 text-accent border-accent/20"
+                        : "text-text-dark hover:bg-secondary hover:translate-x-2"
+                    )}
+                  >
+                    {link.name}
+                  </Link>
+                </motion.div>
               ))}
             </div>
-          </div>
+          </motion.div>
         )}
-      </div>
-    </nav>
+      </AnimatePresence>
+    </motion.nav>
   );
 }

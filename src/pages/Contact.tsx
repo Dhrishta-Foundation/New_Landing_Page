@@ -1,13 +1,8 @@
 import { useState, FormEvent } from 'react';
-import { useScrollAnimation } from '../hooks/useScrollAnimation';
-import { Mail, Phone, MapPin, Handshake, Heart, UserPlus, Rocket } from 'lucide-react';
+import { Mail, Phone, MapPin, Handshake, Heart, UserPlus, Rocket, Send, ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export default function Contact() {
-  const header = useScrollAnimation();
-  const info = useScrollAnimation();
-  const form = useScrollAnimation();
-  const involvement = useScrollAnimation();
-
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -17,223 +12,188 @@ export default function Contact() {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-
     const mailtoLink = `mailto:dhrishtaeducation@gmail.com?subject=${encodeURIComponent(
       formData.subject
     )}&body=${encodeURIComponent(
       `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
     )}`;
-
     window.location.href = mailtoLink;
   };
 
-  const involvementCards = [
-    {
-      icon: Handshake,
-      title: 'Partner With Us',
-      description:
-        'Join forces with us to create lasting impact in communities. We welcome partnerships with organizations that share our vision for social change.',
-    },
-    {
-      icon: Heart,
-      title: 'Donate',
-      description:
-        'Support our initiatives through financial contributions. Your donations help us expand our reach and impact more lives.',
-    },
-    {
-      icon: UserPlus,
-      title: 'Volunteer',
-      description:
-        'Contribute your time and skills to our programs. We have various volunteering opportunities across our educational and healthcare initiatives.',
-    },
-    {
-      icon: Rocket,
-      title: 'Collaborate',
-      description:
-        "Work with us on projects and initiatives. We're always open to collaborative efforts that can amplify our social impact.",
-    },
-  ];
-
   return (
-    <div className="min-h-screen pt-20">
-      <section className="relative h-[400px] flex items-center justify-center bg-gradient-to-br from-primary to-primary/80">
-        <div className="absolute inset-0 bg-black/20" />
-        <div
-          ref={header.ref}
-          className={`relative z-10 text-center px-4 transition-all duration-1000 ${
-            header.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-          }`}
+    <div className="min-h-screen pt-20 bg-surface">
+      {/* Hero Section */}
+      <section className="relative h-[300px] flex items-center justify-center bg-primary-dark overflow-hidden">
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=2084&auto=format&fit=crop')] bg-cover bg-center opacity-20 mix-blend-overlay" />
+        <div className="absolute inset-0 bg-gradient-to-t from-primary-dark to-transparent" />
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="relative z-10 text-center px-4 max-w-4xl mx-auto"
         >
-          <h1 className="text-5xl font-bold text-white mb-4">Contact Us</h1>
-          <p className="text-xl text-white/90">Get in Touch with Our Team</p>
-        </div>
+          <span className="text-accent font-semibold tracking-wider uppercase mb-4 block">Get in Touch</span>
+          <h1 className="text-5xl font-bold text-white mb-2">Contact Us</h1>
+          <p className="text-xl text-white/90 leading-relaxed font-light">
+            We'd love to hear from you. Let's create impact together.
+          </p>
+        </motion.div>
       </section>
 
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4 max-w-[1200px]">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <div
-              ref={info.ref}
-              className={`transition-all duration-1000 ${
-                info.isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
-              }`}
+      {/* Contact Content */}
+      <section className="py-20 relative">
+        <div className="container-custom relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+
+            {/* Contact Info */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
             >
-              <h2 className="text-3xl font-bold text-primary mb-8">Contact Information</h2>
-              <div className="space-y-6">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center flex-shrink-0">
-                    <MapPin size={24} className="text-accent" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold text-primary mb-2">Office Address</h3>
-                    <p className="text-text-dark leading-relaxed">
-                      Dhrishta Educational Foundation<br />
-                      No.153, 3rd Link Road, Palkalai Nagar<br />
-                      Palavakkam, Chennai - 600041<br />
-                      Tamil Nadu, India
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center flex-shrink-0">
-                    <Mail size={24} className="text-accent" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold text-primary mb-2">Email</h3>
-                    <a
-                      href="mailto:dhrishtaeducation@gmail.com"
-                      className="text-text-dark hover:text-accent transition-colors"
-                    >
-                      dhrishtaeducation@gmail.com
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center flex-shrink-0">
-                    <Phone size={24} className="text-accent" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold text-primary mb-2">Phone</h3>
-                    <a
-                      href="tel:+919100044339"
-                      className="text-text-dark hover:text-accent transition-colors"
-                    >
-                      +91 910 0044 339
-                    </a>
-                  </div>
-                </div>
+              <h2 className="text-3xl font-bold text-primary-dark mb-8">Contact Information</h2>
+              <div className="space-y-8">
+                {[
+                  { icon: MapPin, title: "Headquarters", content: "No.153, 3rd Link Road, Palkalai Nagar,\nPalavakkam, Chennai - 600041\nTamil Nadu, India" },
+                  { icon: Mail, title: "Email Us", content: "dhrishtaeducation@gmail.com", href: "mailto:dhrishtaeducation@gmail.com" },
+                  { icon: Phone, title: "Call Us", content: "+91 910 0044 339", href: "tel:+919100044339" }
+                ].map((item, index) => {
+                  const Icon = item.icon;
+                  return (
+                    <div key={index} className="flex items-start gap-6 group">
+                      <div className="w-14 h-14 bg-white rounded-2xl shadow-soft flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:bg-accent group-hover:text-white transition-all duration-300 text-primary-dark">
+                        <Icon size={24} />
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-bold text-primary-dark mb-2">{item.title}</h3>
+                        {item.href ? (
+                          <a href={item.href} className="text-text hover:text-accent transition-colors block text-lg">
+                            {item.content}
+                          </a>
+                        ) : (
+                          <p className="text-text leading-relaxed whitespace-pre-line text-lg">
+                            {item.content}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
-            </div>
+            </motion.div>
 
-            <div
-              ref={form.ref}
-              className={`transition-all duration-1000 ${
-                form.isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
-              }`}
+            {/* Contact Form */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="bg-white p-8 md:p-10 rounded-3xl shadow-lg border border-border-light relative overflow-hidden"
             >
-              <h2 className="text-3xl font-bold text-primary mb-8">Send us a Message</h2>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label htmlFor="name" className="block text-text-dark font-semibold mb-2">
-                    Full Name *
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    required
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-4 py-3 rounded-lg border border-border-light focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20 transition-all"
-                  />
+              <div className="absolute top-0 right-0 w-32 h-32 bg-accent/5 rounded-bl-full -z-0" />
+
+              <h2 className="text-3xl font-bold text-primary-dark mb-6 relative z-10">Send us a Message</h2>
+              <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-semibold text-text-light mb-2 uppercase tracking-wide">Full Name</label>
+                    <input
+                      type="text"
+                      required
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      className="w-full px-4 py-3 rounded-xl bg-secondary/50 border border-transparent focus:bg-white focus:border-accent focus:ring-4 focus:ring-accent/10 transition-all outline-none"
+                      placeholder="John Doe"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-semibold text-text-light mb-2 uppercase tracking-wide">Email Address</label>
+                    <input
+                      type="email"
+                      required
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      className="w-full px-4 py-3 rounded-xl bg-secondary/50 border border-transparent focus:bg-white focus:border-accent focus:ring-4 focus:ring-accent/10 transition-all outline-none"
+                      placeholder="john@example.com"
+                    />
+                  </div>
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block text-text-dark font-semibold mb-2">
-                    Email Address *
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    required
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-4 py-3 rounded-lg border border-border-light focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20 transition-all"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="subject" className="block text-text-dark font-semibold mb-2">
-                    Subject *
-                  </label>
+                  <label className="block text-sm font-semibold text-text-light mb-2 uppercase tracking-wide">Subject</label>
                   <input
                     type="text"
-                    id="subject"
                     required
                     value={formData.subject}
                     onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                    className="w-full px-4 py-3 rounded-lg border border-border-light focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20 transition-all"
+                    className="w-full px-4 py-3 rounded-xl bg-secondary/50 border border-transparent focus:bg-white focus:border-accent focus:ring-4 focus:ring-accent/10 transition-all outline-none"
+                    placeholder="How can we help?"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="block text-text-dark font-semibold mb-2">
-                    Message *
-                  </label>
+                  <label className="block text-sm font-semibold text-text-light mb-2 uppercase tracking-wide">Message</label>
                   <textarea
-                    id="message"
                     required
-                    rows={5}
+                    rows={4}
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full px-4 py-3 rounded-lg border border-border-light focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20 transition-all resize-none"
+                    className="w-full px-4 py-3 rounded-xl bg-secondary/50 border border-transparent focus:bg-white focus:border-accent focus:ring-4 focus:ring-accent/10 transition-all outline-none resize-none"
+                    placeholder="Tell us more about your inquiry..."
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full bg-accent text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-accent/90 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                  className="w-full btn-primary py-4 text-lg shadow-lg shadow-accent/25 hover:shadow-accent/40 flex items-center justify-center gap-2"
                 >
-                  Send Message
+                  <Send size={20} /> Send Message
                 </button>
               </form>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      <section className="py-16 bg-secondary">
-        <div className="container mx-auto px-4 max-w-[1200px]">
-          <h2 className="text-4xl font-bold text-center text-primary mb-12">Get Involved</h2>
-          <div
-            ref={involvement.ref}
-            className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 transition-all duration-1000 ${
-              involvement.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}
-          >
-            {involvementCards.map((card, index) => {
+      {/* Involvement Cards */}
+      <section className="py-16 bg-surface-alt">
+        <div className="container-custom">
+          <h2 className="text-3xl font-bold text-center text-primary-dark mb-12">Ways to Get Involved</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { icon: Handshake, title: 'Partner', desc: 'Join forces for lasting impact.' },
+              { icon: Heart, title: 'Donate', desc: 'Support our initiatives financially.' },
+              { icon: UserPlus, title: 'Volunteer', desc: 'Contribute time and skills.' },
+              { icon: Rocket, title: 'Collaborate', desc: 'Work on innovative projects.' },
+            ].map((card, index) => {
               const Icon = card.icon;
               return (
-                <div
+                <motion.div
                   key={index}
-                  className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="bg-white rounded-2xl p-6 shadow-soft hover:shadow-medium transition-all duration-300 hover:-translate-y-2 text-center group"
                 >
-                  <div className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center mb-4">
-                    <Icon size={24} className="text-accent" />
+                  <div className="w-16 h-16 bg-secondary rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-accent/10 transition-colors">
+                    <Icon size={28} className="text-primary-dark group-hover:text-accent transition-colors" />
                   </div>
-                  <h3 className="text-xl font-bold text-primary mb-3">{card.title}</h3>
-                  <p className="text-text-dark text-sm leading-relaxed">{card.description}</p>
-                </div>
+                  <h3 className="text-xl font-bold text-primary-dark mb-2">{card.title}</h3>
+                  <p className="text-text-light text-sm leading-relaxed mb-4">{card.desc}</p>
+
+                </motion.div>
               );
             })}
           </div>
           <div className="text-center mt-12">
             <a
               href="mailto:dhrishtaeducation@gmail.com"
-              className="inline-block bg-accent text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-accent/90 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+              className="inline-flex items-center gap-2 text-primary-dark font-bold hover:text-accent transition-colors border-b-2 border-accent pb-1"
             >
-              Join Us and Make a Difference Today
+              Contact us for opportunities <ArrowRight size={16} />
             </a>
           </div>
         </div>

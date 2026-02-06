@@ -1,4 +1,6 @@
-
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @layer base {
   html {
@@ -6,11 +8,37 @@
   }
 
   body {
-    @apply font-lato text-text-dark;
+    @apply font-['Outfit'] text-text bg-surface antialiased;
   }
 
-  * {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-bold text-primary-dark tracking-tight;
+  }
+
+  ::selection {
+    @apply bg-accent-light/30 text-primary-dark;
+  }
+}
+
+@layer components {
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .btn-primary {
+    @apply bg-accent text-white px-6 py-3 rounded-xl font-semibold shadow-lg shadow-accent/20 hover:bg-accent-hover hover:shadow-accent/40 active:scale-95 transition-all duration-300;
+  }
+
+  .btn-secondary {
+    @apply bg-white text-primary-dark px-6 py-3 rounded-xl font-semibold shadow-md hover:bg-surface-alt hover:shadow-lg active:scale-95 transition-all duration-300 border border-border-light;
+  }
+
+  .glass-panel {
+    @apply bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl;
   }
 }

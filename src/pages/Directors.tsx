@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { useScrollAnimation } from '../hooks/useScrollAnimation';
-import { X } from 'lucide-react';
+import { X, Linkedin, Mail, ChevronRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface Director {
   name: string;
@@ -9,11 +9,13 @@ interface Director {
   label: string;
   shortDescription: string;
   fullDescription: string;
+  socials?: {
+    linkedin?: string;
+    email?: string;
+  };
 }
 
 export default function Directors() {
-  const header = useScrollAnimation();
-  const cards = useScrollAnimation();
   const [selectedDirector, setSelectedDirector] = useState<Director | null>(null);
 
   const directors: Director[] = [
@@ -23,9 +25,13 @@ export default function Directors() {
       title: 'Academic Leader & FSSAI Member',
       label: 'Board of Directors',
       shortDescription:
-        'Dean at Apollo University with over 153 publications. Led projects worth ₹200 Lakhs and brings extensive academic expertise to our foundation.',
+        'Dean at Apollo University with over 153 publications. Led projects worth ₹200 Lakhs and brings extensive academic expertise.',
       fullDescription:
-        "Dr. K. Bhaskar Reddy leads our pharmaceutical and health sciences research with distinguished credentials as Professor & Dean at Apollo Institute of Pharmaceutical Sciences and Dean (in-charge) of the School of Health Sciences at The Apollo University. His research portfolio includes over 153 peer-reviewed publications and multiple patents that have advanced pharmaceutical knowledge. As principal investigator for seven major research projects valued at ₹200 Lakhs and funded by prestigious bodies such as the Department of Science & Technology (DST) and the Indian Council of Medical Research (ICMR), he has established himself as a significant contributor to India's research landscape. His multidisciplinary research expertise is recognized through his membership on the Scientific Panel/Scientific Expert Committee on Functional Foods, Nutraceuticals, and Dietetic Products under FSSAI, under the Ministry of Health & Family Welfare, Government of India. His research leadership extends to serving as Dean - R&D at Sri Venkateswara Group of Educational Institutions (SVGEI), where he established research centers, secured research funding, and developed research partnerships with international universities. Dr. Reddy's research excellence has been recognized with the Young Scientist Award by SERB, DST, highlighting his innovative contributions to pharmaceutical sciences. As Chief Editor of the International Journal of Advanced Biomedical and Pharmaceutical Research (IJABPR) and reviewer for multiple international journals, he plays a critical role in advancing scientific publishing and research dissemination. His interdisciplinary research vision and commitment to evidence-based healthcare innovations continue to drive Dhrishta's research agenda.",
+        "Dr. K. Bhaskar Reddy leads our pharmaceutical and health sciences research with distinguished credentials as Professor & Dean at Apollo Institute of Pharmaceutical Sciences and Dean (in-charge) of the School of Health Sciences at The Apollo University.\n\nHis research portfolio includes over 153 peer-reviewed publications and multiple patents that have advanced pharmaceutical knowledge. As principal investigator for seven major research projects valued at ₹200 Lakhs and funded by prestigious bodies such as DST and ICMR, he has established himself as a significant contributor to India's research landscape.\n\nHis multidisciplinary research expertise is recognized through his membership on the Scientific Panel/Scientific Expert Committee on Functional Foods, Nutraceuticals, and Dietetic Products under FSSAI. His research leadership extends to serving as Dean - R&D at Sri Venkateswara Group of Educational Institutions, where he established research centers and developed partnerships with international universities.",
+      socials: {
+        linkedin: "#",
+        email: "bhaskar.reddy@dhrishta.org"
+      }
     },
     {
       name: 'Mr. A. Rukesh Reddy',
@@ -33,9 +39,13 @@ export default function Directors() {
       title: 'Engineering Research & Innovation Lead',
       label: 'Board of Directors',
       shortDescription:
-        'Mechanical Engineering professional, SPOC for Dassault. Actively involved with Skill Development and various training/mentoring initiatives.',
+        'Mechanical Engineering professional, SPOC for Dassault. Actively involved with Skill Development and mentoring initiatives.',
       fullDescription:
-        "Mr. A. Rukesh Reddy directs our engineering research and innovation initiatives, bringing specialized expertise in Mechanical Engineering, advanced manufacturing technologies, and emerging fields like 3D Printing. Currently pursuing doctoral research at Pacific University, Udaipur, his investigative focus represents the foundation's commitment to continuous knowledge advancement. His leadership in technology research is demonstrated through his role as Single Point of Contact (SPOC) for Dassault Systems' 3D Experience Lab, where he has facilitated applied research in digital manufacturing technologies. His expertise in securing research grants from funding bodies such as UGC, AICTE, and DST has strengthened institutional research capacity and infrastructure development. Mr. Reddy's contributions to technology diffusion through the Skill Development initiatives and have created a bridge between laboratory research and practical applications. His ongoing specialized research training in 3D Printing from the University of Illinois and Supply Chain Logistics from Rutgers University reflects his commitment to advancing research frontiers. At Dhrishta, he leads research initiatives in advanced manufacturing, engineering education, and technology transfer that connect theoretical frameworks with practical applications.",
+        "Mr. A. Rukesh Reddy directs our engineering research and innovation initiatives, bringing specialized expertise in Mechanical Engineering, advanced manufacturing technologies, and emerging fields like 3D Printing. Currently pursuing doctoral research at Pacific University, Udaipur.\n\nHis leadership in technology research is demonstrated through his role as SPOC for Dassault Systems' 3D Experience Lab, where he has facilitated applied research in digital manufacturing technologies. His expertise in securing research grants from funding bodies such as UGC, AICTE, and DST has strengthened institutional research capacity.\n\nMr. Reddy's ongoing specialized research training in 3D Printing from the University of Illinois and Supply Chain Logistics from Rutgers University reflects his commitment to advancing research frontiers.",
+      socials: {
+        linkedin: "#",
+        email: "rukesh.reddy@dhrishta.org"
+      }
     },
     {
       name: 'Mr. Rajesh Kadati',
@@ -43,98 +53,147 @@ export default function Directors() {
       title: 'Digital Innovation & Automation Expert',
       label: 'Board of Directors',
       shortDescription:
-        'Senior Test Engineer at TCS with experience at Apple Inc. Expertise in DevOps and API Testing, actively mentoring professionals and supporting foundation\'s technical initiatives.',
+        'Senior Test Engineer at TCS with experience at Apple Inc. Expertise in DevOps and API Testing.',
       fullDescription:
-        'Mr. Rajesh Kadati heads our digital innovation research with over 14 years of specialized expertise in automation technologies, software quality engineering, and DevOps methodologies. His technical research at Tata Consultancy Services (TCS) has involved developing innovative testing frameworks and quality assurance methodologies for global technology leaders like Apple Inc. His research focus on API automation, mobile application testing protocols, and performance optimization has contributed significant knowledge to software quality engineering. His expertise in web services testing (REST & SOAP UI) and performance analysis using JMeter and LoadRunner demonstrates his research depth in digital technologies. At Dhrishta, Mr. Kadati\'s technical research informs our digital education platforms, online learning analytics, and educational technology innovations. His expertise in automation frameworks and continuous integration methodologies drives our research in adaptive learning technologies, educational data mining, and AI-driven assessment systems. His investigative approach to technology implementation ensures that Dhrishta\'s digital initiatives are built on sound scientific principles and research evidence.',
+        'Mr. Rajesh Kadati heads our digital innovation research with over 14 years of specialized expertise in automation technologies, software quality engineering, and DevOps methodologies. His technical research at Tata Consultancy Services (TCS) has involved developing innovative testing frameworks for global technology leaders like Apple Inc.\n\nHis research focus on API automation, mobile application testing protocols, and performance optimization has contributed significant knowledge to software quality engineering. At Dhrishta, Mr. Kadati\'s technical research informs our digital education platforms, online learning analytics, and educational technology innovations.\n\nHis expertise in automation frameworks and continuous integration methodologies drives our research in adaptive learning technologies and AI-driven assessment systems.',
+      socials: {
+        linkedin: "#",
+        email: "rajesh.kadati@dhrishta.org"
+      }
     },
   ];
 
   return (
-    <div className="min-h-screen pt-20">
-      <section className="relative h-[400px] flex items-center justify-center bg-gradient-to-br from-primary to-primary/80">
-        <div className="absolute inset-0 bg-black/20" />
-        <div
-          ref={header.ref}
-          className={`relative z-10 text-center px-4 transition-all duration-1000 ${
-            header.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-          }`}
+    <div className="min-h-screen pt-20 bg-surface">
+      {/* Hero Section */}
+      <section className="relative h-[400px] flex items-center justify-center bg-primary-dark overflow-hidden">
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=2032&auto=format&fit=crop')] bg-cover bg-center opacity-20 mix-blend-overlay" />
+        <div className="absolute inset-0 bg-gradient-to-t from-primary-dark to-transparent" />
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="relative z-10 text-center px-4 max-w-4xl mx-auto"
         >
-          <h1 className="text-5xl font-bold text-white mb-4">Our Directors</h1>
-          <p className="text-xl text-white/90">
-            Meet the passionate leaders driving Dhrishta Educational Foundation's vision and impact.
+          <span className="text-accent font-semibold tracking-wider uppercase mb-4 block">Leadership</span>
+          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">Our Directors</h1>
+          <p className="text-xl text-white/90 leading-relaxed font-light">
+            Meet the visionary leaders driving Dhrishta Educational Foundation's  research and impact.
           </p>
-        </div>
+        </motion.div>
       </section>
 
-      <section className="py-16 bg-secondary">
-        <div className="container mx-auto px-4 max-w-[1200px]">
-          <div
-            ref={cards.ref}
-            className={`grid grid-cols-1 md:grid-cols-3 gap-8 transition-all duration-1000 ${
-              cards.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}
-          >
+      {/* Directors Grid */}
+      <section className="py-24">
+        <div className="container-custom">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             {directors.map((director, index) => (
-              <div
+              <motion.div
                 key={index}
-                className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 cursor-pointer"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="group relative bg-white rounded-2xl overflow-hidden shadow-soft hover:shadow-hard transition-all duration-300 cursor-pointer border border-border-light"
                 onClick={() => setSelectedDirector(director)}
               >
-                <img
-                  src={director.image}
-                  alt={director.name}
-                  className="w-full h-64 object-cover"
-                />
-                <div className="p-6">
-                  <div className="inline-block bg-accent/10 text-accent text-sm font-semibold px-3 py-1 rounded-full mb-3">
-                    {director.label}
+                <div className="relative h-80 overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary-dark/80 to-transparent opacity-60 z-10" />
+                  <img
+                    src={director.image}
+                    alt={director.name}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute bottom-4 left-4 right-4 z-20">
+                    <span className="inline-block bg-accent text-white text-xs font-bold px-3 py-1 rounded-full mb-2 shadow-sm">
+                      {director.label}
+                    </span>
                   </div>
-                  <h3 className="text-2xl font-bold text-primary mb-2">{director.name}</h3>
-                  <p className="text-lg text-accent font-semibold mb-3">{director.title}</p>
-                  <p className="text-text-dark leading-relaxed">{director.shortDescription}</p>
-                  <button className="mt-4 text-accent font-semibold hover:text-primary transition-colors">
-                    Read More →
-                  </button>
                 </div>
-              </div>
+
+                <div className="p-8 relative">
+                  {/* Floating Action Button overlap */}
+                  <div className="absolute -top-6 right-8 z-30 bg-white rounded-full p-3 shadow-lg group-hover:bg-accent group-hover:text-white transition-colors duration-300">
+                    <ChevronRight size={24} />
+                  </div>
+
+                  <h3 className="text-2xl font-bold text-primary-dark mb-1 group-hover:text-accent transition-colors">{director.name}</h3>
+                  <p className="text-sm font-semibold text-text-light mb-4 uppercase tracking-wide">{director.title}</p>
+                  <p className="text-text leading-relaxed line-clamp-3">
+                    {director.shortDescription}
+                  </p>
+                </div>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {selectedDirector && (
-        <div
-          className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
-          onClick={() => setSelectedDirector(null)}
-        >
-          <div
-            className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative"
-            onClick={(e) => e.stopPropagation()}
+      {/* Director Modal */}
+      <AnimatePresence>
+        {selectedDirector && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-sm"
+            onClick={() => setSelectedDirector(null)}
           >
-            <button
-              onClick={() => setSelectedDirector(null)}
-              className="absolute top-4 right-4 bg-white rounded-full p-2 shadow-lg hover:bg-gray-100 transition-colors z-10"
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="bg-white rounded-3xl max-w-5xl w-full max-h-[90vh] overflow-hidden shadow-2xl flex flex-col md:flex-row relative"
+              onClick={(e) => e.stopPropagation()}
             >
-              <X size={24} />
-            </button>
-            <img
-              src={selectedDirector.image}
-              alt={selectedDirector.name}
-              className="w-full h-80 object-cover"
-            />
-            <div className="p-8">
-              <div className="inline-block bg-accent/10 text-accent text-sm font-semibold px-3 py-1 rounded-full mb-3">
-                {selectedDirector.label}
+              <button
+                onClick={() => setSelectedDirector(null)}
+                className="absolute top-4 right-4 bg-white/20 hover:bg-white/40 backdrop-blur-md text-white md:text-primary-dark md:bg-gray-100 md:hover:bg-gray-200 rounded-full p-2 transition-colors z-20"
+              >
+                <X size={24} />
+              </button>
+
+              <div className="w-full md:w-2/5 relative h-64 md:h-auto">
+                <div className="absolute inset-0 bg-primary-dark/20 mix-blend-multiply md:hidden" />
+                <img
+                  src={selectedDirector.image}
+                  alt={selectedDirector.name}
+                  className="w-full h-full object-cover"
+                />
               </div>
-              <h2 className="text-3xl font-bold text-primary mb-2">{selectedDirector.name}</h2>
-              <p className="text-xl text-accent font-semibold mb-6">{selectedDirector.title}</p>
-              <p className="text-text-dark text-lg leading-relaxed whitespace-pre-line">
-                {selectedDirector.fullDescription}
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
+
+              <div className="w-full md:w-3/5 p-8 md:p-12 overflow-y-auto">
+                <div className="inline-block bg-accent/10 text-accent text-sm font-bold px-4 py-1.5 rounded-full mb-6">
+                  {selectedDirector.label}
+                </div>
+                <h2 className="text-3xl md:text-4xl font-bold text-primary-dark mb-2">{selectedDirector.name}</h2>
+                <p className="text-xl text-text-light font-medium mb-8 border-b border-border-light pb-6">{selectedDirector.title}</p>
+
+                <div className="prose prose-lg text-text max-w-none mb-8">
+                  <p className="whitespace-pre-line leading-relaxed">
+                    {selectedDirector.fullDescription}
+                  </p>
+                </div>
+
+                <div className="flex gap-4 pt-4 border-t border-border-light">
+                  {selectedDirector.socials?.linkedin && (
+                    <a href={selectedDirector.socials.linkedin} className="p-3 bg-gray-100 rounded-full hover:bg-[#0077b5] hover:text-white transition-all">
+                      <Linkedin size={20} />
+                    </a>
+                  )}
+                  {selectedDirector.socials?.email && (
+                    <a href={`mailto:${selectedDirector.socials.email}`} className="p-3 bg-gray-100 rounded-full hover:bg-accent hover:text-white transition-all">
+                      <Mail size={20} />
+                    </a>
+                  )}
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
