@@ -117,7 +117,7 @@ export default function Research() {
     <div className="min-h-screen pt-20 bg-surface">
       {/* Hero Section */}
       <section className="relative h-[400px] flex items-center justify-center bg-primary-dark overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-20 mix-blend-overlay" />
+        <div className="absolute inset-0 bg-[url('/assets/images/DSC01307.jpg')] bg-cover bg-center opacity-30 mix-blend-overlay" />
         <div className="absolute inset-0 bg-gradient-to-t from-primary-dark to-transparent" />
 
         <motion.div
